@@ -1,5 +1,6 @@
 #include "main.h"
 #include "Scene.h"
+#include"charaBase/CharaBase.h"
 
 
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
@@ -50,6 +51,9 @@ void Scene::Draw2D()
 		SHADER.m_spriteShader.SetMatrix(bossMat);
 		SHADER.m_spriteShader.DrawTex(&bossTex, Math::Rectangle{ (int)bossAnimeCnt * 224,0,224,240 }, 1.0f);
 	}
+
+	//m_charaBase->Draw2D();
+	
 	//この下にDrawStringを書く----------------------------------------------------------------------------------
 
 	//①文字列格納用の配列作成

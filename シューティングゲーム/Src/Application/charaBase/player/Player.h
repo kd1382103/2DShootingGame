@@ -1,14 +1,13 @@
 #pragma once
 
-class CharaBase;
+#include "../CharaBase.h"
 
-class Player
+class Player :public CharaBase
 {
 public:
 	Player();
-	~Player() {}
+	~Player() { Release(); }
 
-	void Release();
 
 	void Update();
 
@@ -16,6 +15,8 @@ public:
 
 private:
 	CharaBase* charaBase;
+
+	void Release();
 
 	//プレイヤー(自機)の変数
 	int playerSpeedBoostFlg = false;	//移動速度加速フラグ

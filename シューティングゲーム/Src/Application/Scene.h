@@ -1,8 +1,12 @@
 #pragma once
 
+class CharaBase;
+
 class Scene
 {
 private:
+
+	CharaBase* m_charaBase;
 
 	// テクスチャ ・・・ 画像データ
 	KdTexture charaTex;

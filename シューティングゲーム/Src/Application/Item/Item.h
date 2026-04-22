@@ -4,13 +4,14 @@ class Item
 {
 public:
 	Item();
-	~Item() {}
-
-	void Release();
+	~Item() { Release(); }
 
 	void Update();
 
 	void Draw2D();
 
 private:
+
+	void Release();
+
 };
