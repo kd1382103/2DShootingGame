@@ -14,6 +14,7 @@ void CharaBase::Update()
 
 void CharaBase::Init()
 {
+	m_tex.Load("");
 }
 
 void CharaBase::Release()
