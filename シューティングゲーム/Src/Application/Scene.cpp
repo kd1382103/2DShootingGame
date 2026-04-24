@@ -29,22 +29,6 @@ void Scene::Draw2D()
 			SHADER.m_spriteShader.DrawTex(&bulletTex, Math::Rectangle{ 0,0,16,16 }, 1.0f);
 		}
 	}
-	
-	//自機の描画
-	if (playerFlg == true) {
-		//①移動行列のセット
-		//SHADER.m_spriteShader.SetMatrix(charaMat);
-		//②描画
-		//SHADER.m_spriteShader.DrawTex(&charaTex, Math::Rectangle{(int)playerAnimeCnt*64,0,64,64 }, 1.0f);
-	}
-	
-	//敵機
-	for (int e = 0;e < enemyNum;e++) {
-		if (enemyFlg[e] == true) {
-			SHADER.m_spriteShader.SetMatrix(enemyMat[e]);
-			SHADER.m_spriteShader.DrawTex(&enemyTex, Math::Rectangle{ 0,0,64,64 }, 1.0f);
-		}
-	}
 
 	//boss
 	if (bossFlg == true) {
@@ -82,92 +66,21 @@ void Scene::Update()
 	int enemyMove = 3;
 	int bulletMove = 15;
 
-	//if (playerFlg == true) {
-	//	//自機移動処理・加速・減速
-	//	//加速
-	//	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-	//	{
-	//		playerSpeedBoostFlg = true;
-	//	}
-	//	else
-	//	{
-	//		playerSpeedBoostFlg = false;
-	//	}
-	//	//減速
-	//	if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-	//	{
-	//		playerSpeedDecreaseFlg = true;
-	//	}
-	//	else 
-	//	{
-	//		playerSpeedDecreaseFlg = false;
-	//	}
-
-	//	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	//	{
-	//		if (playerSpeedBoostFlg)
-	//		{
-	//			playerMove += 2;
-	//		}
-	//		if (playerSpeedDecreaseFlg)
-	//		{
-	//			playerMove -= 2;
-	//		}
-	//		playerX += playerMove;
-	//	}
-	//	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	//	{
-	//		if (playerSpeedBoostFlg)
-	//		{
-	//			playerMove += 2;
-	//		}
-	//		if (playerSpeedDecreaseFlg)
-	//		{
-	//			playerMove -= 2;
-	//		}
-	//		playerX -= playerMove;
-
-	//	}
-	//	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	//	{
-	//		if (playerSpeedBoostFlg)
-	//		{
-	//			playerMove += 2;
-	//		}
-	//		if (playerSpeedDecreaseFlg)
-	//		{
-	//			playerMove -= 2;
-	//		}
-	//		playerY -= playerMove;
-	//	}
-	//	if (GetAsyncKeyState(VK_UP) & 0x8000)
-	//	{
-	//		if (playerSpeedBoostFlg)
-	//		{
-	//			playerMove += 2;
-	//		}
-	//		if (playerSpeedDecreaseFlg)
-	//		{
-	//			playerMove -= 2;
-	//		}
-	//		playerY += playerMove;
-	//	}
-
-	//両端判定
-	if (playerX > screenEdgeX / 2 - charaRadius) {
-		playerX = screenEdgeX / 2 - charaRadius;
-	}
-	if (playerX < -screenEdgeX / 2 - charaRadius) {
-		playerX = -screenEdgeX / 2 - charaRadius;
-	}
+	////両端判定
+	//if (playerX > screenEdgeX / 2 - charaRadius) {
+	//	playerX = screenEdgeX / 2 - charaRadius;
+	//}
+	//if (playerX < -screenEdgeX / 2 - charaRadius) {
+	//	playerX = -screenEdgeX / 2 - charaRadius;
+	//}
 	//弾発射(スペースキー）
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
 		if (shotWait == 0) {
 			for (int bu = 0;bu < bulletNum;bu++) {
 				if (bulletFlg[bu] == false) {
 					bulletFlg[bu] = true;
-					bulletX[bu] = playerX;
-					bulletY[bu] = playerY;
+					/*bulletX[bu] = playerX;
+					bulletY[bu] = playerY;*/
 					shotWait = 10;
 					break;
 				}
@@ -196,15 +109,15 @@ void Scene::Update()
 
 			if (playerFlg == 1) {
 				//自機との当たり判定
-				float a = enemyX[e] - playerX;//底辺
-				float b = enemyY[e] - playerY;//高さ
-				float c = sqrt(a * a + b * b);//斜辺（sqrt→ルート）
+				//float a = enemyX[e] - playerX;//底辺
+				//float b = enemyY[e] - playerY;//高さ
+				//float c = sqrt(a * a + b * b);//斜辺（sqrt→ルート）
 
-				if (c < charaRadius + charaRadius) {//衝突していたら(斜辺＜半径+半径)
-					enemyFlg[e] = false;//敵を倒す
-					playerFlg = false;
-					Explosion(playerX,playerY);
-				}
+				//if (c < charaRadius + charaRadius) {//衝突していたら(斜辺＜半径+半径)
+					//enemyFlg[e] = false;//敵を倒す
+					//playerFlg = false;
+					//Explosion(playerX,playerY);
+				//}
 			}
 		}
 
@@ -298,7 +211,7 @@ void Scene::Update()
 	}
 	//↓Updateの最後に行列作成↓↓
 	//自機
-	charaMat = Math::Matrix::CreateTranslation(playerX, playerY, 0);
+	//m_player =Math::Matrix::CreateTranslation(playerX, playerY, 0);
 	//敵機
 	for (int e = 0;e < enemyNum;e++) {
 		enemyMat[e] = Math::Matrix::CreateTranslation(enemyX[e], enemyY[e], 0);
@@ -340,17 +253,15 @@ void Scene::Init()
 	//乱数の初期化(※必ずInitに一度だけ書く)
 	srand(time(0));
 	// 画像の読み込み処理
-	charaTex.Load("Texture/player.png");//Texture/...Textureフォルダ内の...って画像を出力
 	backgroundTex.Load("Texture/back.png");
-	enemyTex.Load("Texture/enemy.png");
 	bossTex.Load("Texture/sozai/bossEnemy.png");
 	bulletTex.Load("Texture/bullet.png");
 	expTex.Load("Texture/explosion.png");
 	//hitPointTex.Load("Texture/sozai/hitPoint.png");
 
 	//自機の初期化処理
-	playerX = 0;
-	playerY = -200;
+	/*playerX = 0;
+	playerY = -200;*/
 	playerFlg = 1;
 	playerAnimeCnt=0;
 
@@ -391,9 +302,9 @@ void Scene::Init()
 void Scene::Release()
 {
 	// 画像の解放処理
-	charaTex.Release();
+	//charaTex.Release();
 	backgroundTex.Release();
-	enemyTex.Release();
+	//enemyTex.Release();
 	bossTex.Release();
 	bulletTex.Release();
 	expTex.Release();
@@ -439,8 +350,8 @@ void Scene::RESET()
 				enemyY[e] = 360 + 32;
 			}
 			playerFlg = 1;
-			playerX = 0;
-			playerY = -200;
+			/*playerX = 0;
+			playerY = -200;*/
 			score = 0;
 		}
 }

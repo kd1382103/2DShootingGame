@@ -1,22 +1,22 @@
 #pragma once
+
 class CharaBase
 {
 public:
-	CharaBase() { Init(); };
+	CharaBase(){}
 	~CharaBase() { Release(); }
 
 	void Update();
-
 	void Draw2D();
 
-	void Init();
+	void GetPos(Math::Vector2 _pos)
+	{
+		m_pos = _pos;
+	}
 
 protected:
-	void Release();
 
-	KdTexture *m_playerTex;
-	KdTexture *m_enemyTex;
-	KdTexture *m_bossTex;
+	void Release();
 
 	Math::Vector2 m_pos;
 	Math::Vector2 m_move;
@@ -25,7 +25,6 @@ protected:
 	Math::Matrix m_transMat;
 	Math::Matrix m_mat;
 
-	bool playerFlg;
-	bool enemyFlg;
-	bool bossFlg;
+private:
+
 };

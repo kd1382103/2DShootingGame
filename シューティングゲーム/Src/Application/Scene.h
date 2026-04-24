@@ -1,6 +1,6 @@
 #pragma once
-#include "charaBase/player/Player.h"
-#include "charaBase/enemy/Enemy.h"
+#include "Application/Player/Player.h"
+#include "Application/Enemy/Enemy.h"
 
 class CharaBase;
 
@@ -13,8 +13,6 @@ private:
 	Enemy* m_enemy;
 
 	// テクスチャ ・・・ 画像データ
-	KdTexture charaTex;	
-	KdTexture enemyTex;
 	KdTexture bossTex;
 
 	KdTexture backgroundTex;
@@ -102,7 +100,7 @@ public:
 	void Draw2D();
 
 	//プレイヤーの座標取得
-	void GetPlayerPos();
+	void GetPlayerPos() { Math::Vector2 m_pos; };
 
 	// GUI処理
 	void ImGuiUpdate();

@@ -2,14 +2,20 @@
 
 Player::Player()
 {
-	m_pos = {0,-200};
-	m_move = {0,0};
-	m_scale = {1,1};
+	m_playerTex->Load("Texture/player.png");
+	m_pos = { 0,-200 };
+	m_move = { 0,0 };
+	m_scale = { 1,1 };
+	movePow = 2;
 }
 
 void Player::Draw2D()
 {
-	charaBase->Draw2D();
+	SHADER.m_spriteShader.SetMatrix(m_mat);
+	if (aliveFlg == true)
+	{
+		SHADER.m_spriteShader.DrawTex(m_playerTex, Math::Rectangle(0, 0, 64, 64));
+	}
 }
 
 void Player::Update()
@@ -19,17 +25,17 @@ void Player::Update()
 
 	charaBase->Update();
 
-	if (playerFlg == true) {
+	if (aliveFlg == true) {
 		//é©ã@à⁄ìÆèàóùÅEâ¡ë¨ÅEå∏ë¨
 		//â¡ë¨
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
 		{
-			m_move += {2, 2};
+			m_move += {movePow,movePow};
 		}
 		//å∏ë¨
 		if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
 		{
-			m_move -= {-2, -2};
+			m_move -= {-movePow, -movePow};
 		}
 
 		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)

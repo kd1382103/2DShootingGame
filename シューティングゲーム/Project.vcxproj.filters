@@ -43,17 +43,14 @@
     <Filter Include="Src\System\Audio">
       <UniqueIdentifier>{667d1cb1-5ae5-476f-acd5-14b7d294a95a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Item">
-      <UniqueIdentifier>{822ec60e-d618-4d52-bf97-f5154976e654}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\charaBase">
       <UniqueIdentifier>{70c70573-bf55-4859-ac69-487f7a4919b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\charaBase\enemy">
-      <UniqueIdentifier>{2cdcb69e-d4e6-445b-9d18-47b17f3d6942}</UniqueIdentifier>
+    <Filter Include="Src\Application\Player">
+      <UniqueIdentifier>{9c161993-4297-44e4-91bc-5bca95642ec0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\charaBase\player">
-      <UniqueIdentifier>{f3d92e29-0aff-4fc0-afd1-8d77ab42df99}</UniqueIdentifier>
+    <Filter Include="Src\Application\Enemy">
+      <UniqueIdentifier>{75753b8b-f480-47eb-8f29-6ec7a590c685}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -150,17 +147,14 @@
     <ClInclude Include="Src\Application\Scene.h">
       <Filter>Src\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Item\Item.h">
-      <Filter>Src\Application\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\charaBase\CharaBase.h">
       <Filter>Src\Application\charaBase</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\charaBase\enemy\Enemy.h">
-      <Filter>Src\Application\charaBase\enemy</Filter>
+    <ClInclude Include="Src\Application\Player\Player.h">
+      <Filter>Src\Application\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\charaBase\player\Player.h">
-      <Filter>Src\Application\charaBase\player</Filter>
+    <ClInclude Include="Src\Application\Enemy\Enemy.h">
+      <Filter>Src\Application\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,17 +221,14 @@
     <ClCompile Include="Src\Application\main.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Item\Item.cpp">
-      <Filter>Src\Application\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\charaBase\CharaBase.cpp">
       <Filter>Src\Application\charaBase</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\charaBase\enemy\Enemy.cpp">
-      <Filter>Src\Application\charaBase\enemy</Filter>
+    <ClCompile Include="Src\Application\Player\Player.cpp">
+      <Filter>Src\Application\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\charaBase\player\Player.cpp">
-      <Filter>Src\Application\charaBase\player</Filter>
+    <ClCompile Include="Src\Application\Enemy\Enemy.cpp">
+      <Filter>Src\Application\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
