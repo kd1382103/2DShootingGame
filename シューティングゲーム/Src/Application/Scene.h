@@ -1,4 +1,6 @@
 #pragma once
+#include "charaBase/player/Player.h"
+#include "charaBase/enemy/Enemy.h"
 
 class CharaBase;
 
@@ -7,15 +9,18 @@ class Scene
 private:
 
 	CharaBase* m_charaBase;
+	Player* m_player;
+	Enemy* m_enemy;
 
 	// テクスチャ ・・・ 画像データ
-	KdTexture charaTex;
-	KdTexture backTex;
+	KdTexture charaTex;	
 	KdTexture enemyTex;
 	KdTexture bossTex;
+
+	KdTexture backgroundTex;
 	KdTexture bulletTex;
 	KdTexture expTex;
-	KdTexture hitPointTex;
+	//KdTexture hitPointTex;
 
 	//スコア
 	int score;
@@ -38,9 +43,6 @@ private:
 	int shotWait;//発射待機時間
 
 	//プレイヤー(自機)の変数
-	Math::Matrix charaMat;//行列...座標・回転・拡縮を管理
-	float playerX;//自機のX座標管理
-	float playerY;
 	int playerFlg;
 	int playerSpeedBoostFlg = false;	//移動速度加速フラグ
 	int playerSpeedDecreaseFlg = false;	//移動速度減少フラグ
@@ -98,6 +100,9 @@ public:
 
 	// 描画処理
 	void Draw2D();
+
+	//プレイヤーの座標取得
+	void GetPlayerPos();
 
 	// GUI処理
 	void ImGuiUpdate();

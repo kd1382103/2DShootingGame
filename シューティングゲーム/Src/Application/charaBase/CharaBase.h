@@ -2,7 +2,7 @@
 class CharaBase
 {
 public:
-	CharaBase();
+	CharaBase() { Init(); };
 	~CharaBase() { Release(); }
 
 	void Update();
@@ -11,10 +11,21 @@ public:
 
 	void Init();
 
-private:
+protected:
 	void Release();
 
-	KdTexture m_tex;
-	Math::Vector3 m_pos = {};
-	bool m_aliveFlg;
+	KdTexture *m_playerTex;
+	KdTexture *m_enemyTex;
+	KdTexture *m_bossTex;
+
+	Math::Vector2 m_pos;
+	Math::Vector2 m_move;
+	Math::Vector2 m_scale;
+	Math::Matrix m_scaleMat;
+	Math::Matrix m_transMat;
+	Math::Matrix m_mat;
+
+	bool playerFlg;
+	bool enemyFlg;
+	bool bossFlg;
 };

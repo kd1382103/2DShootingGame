@@ -10,10 +10,10 @@ void Scene::Draw2D()
 
 	//背景(1)
 	SHADER.m_spriteShader.SetMatrix(backMat1);
-	SHADER.m_spriteShader.DrawTex(&backTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
+	SHADER.m_spriteShader.DrawTex(&backgroundTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
 	//背景(2)
 	SHADER.m_spriteShader.SetMatrix(backMat2);
-	SHADER.m_spriteShader.DrawTex(&backTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
+	SHADER.m_spriteShader.DrawTex(&backgroundTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
 
 	//爆発の表示
 	for(int ex=0;ex<expNum;ex++){
@@ -33,9 +33,9 @@ void Scene::Draw2D()
 	//自機の描画
 	if (playerFlg == true) {
 		//①移動行列のセット
-		SHADER.m_spriteShader.SetMatrix(charaMat);
+		//SHADER.m_spriteShader.SetMatrix(charaMat);
 		//②描画
-		SHADER.m_spriteShader.DrawTex(&charaTex, Math::Rectangle{(int)playerAnimeCnt*64,0,64,64 }, 1.0f);
+		//SHADER.m_spriteShader.DrawTex(&charaTex, Math::Rectangle{(int)playerAnimeCnt*64,0,64,64 }, 1.0f);
 	}
 	
 	//敵機
@@ -79,113 +79,112 @@ void Scene::Draw2D()
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
 void Scene::Update()
 {
-	int playerMove = 3;
 	int enemyMove = 3;
 	int bulletMove = 15;
 
-	if (playerFlg == true) {
-		//自機移動処理・加速・減速
-		//加速
-		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-		{
-			playerSpeedBoostFlg = true;
-		}
-		else
-		{
-			playerSpeedBoostFlg = false;
-		}
-		//減速
-		if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-		{
-			playerSpeedDecreaseFlg = true;
-		}
-		else 
-		{
-			playerSpeedDecreaseFlg = false;
-		}
+	//if (playerFlg == true) {
+	//	//自機移動処理・加速・減速
+	//	//加速
+	//	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+	//	{
+	//		playerSpeedBoostFlg = true;
+	//	}
+	//	else
+	//	{
+	//		playerSpeedBoostFlg = false;
+	//	}
+	//	//減速
+	//	if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
+	//	{
+	//		playerSpeedDecreaseFlg = true;
+	//	}
+	//	else 
+	//	{
+	//		playerSpeedDecreaseFlg = false;
+	//	}
 
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		{
-			if (playerSpeedBoostFlg)
-			{
-				playerMove += 2;
-			}
-			if (playerSpeedDecreaseFlg)
-			{
-				playerMove -= 2;
-			}
-			playerX += playerMove;
-		}
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		{
-			if (playerSpeedBoostFlg)
-			{
-				playerMove += 2;
-			}
-			if (playerSpeedDecreaseFlg)
-			{
-				playerMove -= 2;
-			}
-			playerX -= playerMove;
+	//	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//	{
+	//		if (playerSpeedBoostFlg)
+	//		{
+	//			playerMove += 2;
+	//		}
+	//		if (playerSpeedDecreaseFlg)
+	//		{
+	//			playerMove -= 2;
+	//		}
+	//		playerX += playerMove;
+	//	}
+	//	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//	{
+	//		if (playerSpeedBoostFlg)
+	//		{
+	//			playerMove += 2;
+	//		}
+	//		if (playerSpeedDecreaseFlg)
+	//		{
+	//			playerMove -= 2;
+	//		}
+	//		playerX -= playerMove;
 
-		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-		{
-			if (playerSpeedBoostFlg)
-			{
-				playerMove += 2;
-			}
-			if (playerSpeedDecreaseFlg)
-			{
-				playerMove -= 2;
-			}
-			playerY -= playerMove;
-		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
-		{
-			if (playerSpeedBoostFlg)
-			{
-				playerMove += 2;
-			}
-			if (playerSpeedDecreaseFlg)
-			{
-				playerMove -= 2;
-			}
-			playerY += playerMove;
-		}
+	//	}
+	//	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	//	{
+	//		if (playerSpeedBoostFlg)
+	//		{
+	//			playerMove += 2;
+	//		}
+	//		if (playerSpeedDecreaseFlg)
+	//		{
+	//			playerMove -= 2;
+	//		}
+	//		playerY -= playerMove;
+	//	}
+	//	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	//	{
+	//		if (playerSpeedBoostFlg)
+	//		{
+	//			playerMove += 2;
+	//		}
+	//		if (playerSpeedDecreaseFlg)
+	//		{
+	//			playerMove -= 2;
+	//		}
+	//		playerY += playerMove;
+	//	}
 
-		//両端判定
-		if (playerX > screenEdgeX / 2 - charaRadius) {
-			playerX = screenEdgeX / 2 - charaRadius;
-		}
-		if (playerX < -screenEdgeX / 2 - charaRadius) {
-			playerX = -screenEdgeX / 2 - charaRadius;
-		}
-		//弾発射(スペースキー）
-		if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
-			if (shotWait == 0) {
-				for (int bu = 0;bu < bulletNum;bu++) {
-					if (bulletFlg[bu] == false) {
-						bulletFlg[bu] = true;
-						bulletX[bu] = playerX;
-						bulletY[bu] = playerY;
-						shotWait = 10;
-						break;
-					}
+	//両端判定
+	if (playerX > screenEdgeX / 2 - charaRadius) {
+		playerX = screenEdgeX / 2 - charaRadius;
+	}
+	if (playerX < -screenEdgeX / 2 - charaRadius) {
+		playerX = -screenEdgeX / 2 - charaRadius;
+	}
+	//弾発射(スペースキー）
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		if (shotWait == 0) {
+			for (int bu = 0;bu < bulletNum;bu++) {
+				if (bulletFlg[bu] == false) {
+					bulletFlg[bu] = true;
+					bulletX[bu] = playerX;
+					bulletY[bu] = playerY;
+					shotWait = 10;
+					break;
 				}
 			}
 		}
-		//自機のアニメーション
-		playerAnimeCnt += playerFrame;
-		if (playerAnimeCnt >= playerAnimeCntMax) {
-			playerAnimeCnt = 0;
-		}
-		//bossのアニメーション
-		bossAnimeCnt += bossFrame;
-		if (bossAnimeCnt >= bossAnimeCntMax){
-			bossAnimeCnt = 0;
-		}
 	}
+	//自機のアニメーション
+	playerAnimeCnt += playerFrame;
+	if (playerAnimeCnt >= playerAnimeCntMax) {
+		playerAnimeCnt = 0;
+	}
+	//bossのアニメーション
+	bossAnimeCnt += bossFrame;
+	if (bossAnimeCnt >= bossAnimeCntMax) {
+		bossAnimeCnt = 0;
+	}
+
 	//敵
 	for (int e = 0;e < enemyNum;e++) {
 		if (enemyFlg[e] == 1) {
@@ -342,12 +341,12 @@ void Scene::Init()
 	srand(time(0));
 	// 画像の読み込み処理
 	charaTex.Load("Texture/player.png");//Texture/...Textureフォルダ内の...って画像を出力
-	backTex.Load("Texture/back.png");
+	backgroundTex.Load("Texture/back.png");
 	enemyTex.Load("Texture/enemy.png");
 	bossTex.Load("Texture/sozai/bossEnemy.png");
 	bulletTex.Load("Texture/bullet.png");
 	expTex.Load("Texture/explosion.png");
-	hitPointTex.Load("Texture/sozai/hitPoint.png");
+	//hitPointTex.Load("Texture/sozai/hitPoint.png");
 
 	//自機の初期化処理
 	playerX = 0;
@@ -393,12 +392,12 @@ void Scene::Release()
 {
 	// 画像の解放処理
 	charaTex.Release();
-	backTex.Release();
+	backgroundTex.Release();
 	enemyTex.Release();
 	bossTex.Release();
 	bulletTex.Release();
 	expTex.Release();
-	hitPointTex.Release();
+	//hitPointTex.Release();
 }
 
 void Scene::ImGuiUpdate()

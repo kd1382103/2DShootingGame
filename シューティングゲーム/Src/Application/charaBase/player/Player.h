@@ -13,13 +13,15 @@ public:
 
 	void Draw2D();
 
+	void SetTex(KdTexture* tex) { m_playerTex = tex; }
+
+	void SetPos(float posX,float posY) { m_pos.x, m_pos.y = posX,posY; };
+
 private:
 	CharaBase* charaBase;
 
-	void Release();
-
 	//プレイヤー(自機)の変数
-	int playerSpeedBoostFlg = false;	//移動速度加速フラグ
-	int playerSpeedDecreaseFlg = false;	//移動速度減少フラグ
+	//int playerSpeedBoostFlg = false;	//移動速度加速フラグ
+	//int playerSpeedDecreaseFlg = false;	//移動速度減少フラグ
 
 };
