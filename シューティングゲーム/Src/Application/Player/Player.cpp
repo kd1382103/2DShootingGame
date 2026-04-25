@@ -1,21 +1,12 @@
 #include "Player.h"
 
-Player::Player()
+void Player::Init()
 {
-	m_playerTex->Load("Texture/player.png");
+	m_playerTex.Load("Texture/player.png");
 	m_pos = { 0,-200 };
 	m_move = { 0,0 };
 	m_scale = { 1,1 };
 	movePow = 2;
-}
-
-void Player::Draw2D()
-{
-	SHADER.m_spriteShader.SetMatrix(m_mat);
-	if (aliveFlg == true)
-	{
-		SHADER.m_spriteShader.DrawTex(m_playerTex, Math::Rectangle(0, 0, 64, 64));
-	}
 }
 
 void Player::Update()
@@ -30,7 +21,7 @@ void Player::Update()
 		//‰Á‘¬
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
 		{
-			m_move += {movePow,movePow};
+			m_move += {movePow, movePow};
 		}
 		//Œ¸‘¬
 		if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
@@ -45,7 +36,7 @@ void Player::Update()
 		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
 			m_pos.x -= m_move.x;
-		}	
+		}
 		if (GetAsyncKeyState(VK_UP) & 0x8000)
 		{
 			m_pos.y += m_move.y;
@@ -57,3 +48,17 @@ void Player::Update()
 	}
 }
 
+void Player::Draw2D()
+{
+	SHADER.m_spriteShader.SetMatrix(m_mat);
+	if (aliveFlg == true)
+	{
+		//SHADER.m_spriteShader.DrawTex(m_playerTex, Math::Rectangle(0, 0, 64, 64));
+		KdShaderManager::GetInstance().m_spriteShader.DrawTex(&m_playerTex, m_pos.x, m_pos.y);
+
+	}
+}
+
+void Player::Release()
+{
+}

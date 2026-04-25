@@ -7,16 +7,15 @@ public:
 	Player();
 	~Player() {}
 
-	void Update();
+	void Update()override;
 
-	void Draw2D();
+	void Draw2D()override;
 
-	void SetTex(KdTexture* tex) { m_playerTex = tex; }
-
-	void SetPos(float posX, float posY) { m_pos.x, m_pos.y = posX, posY; };
+	void Init()override;
+	void Release()override;
 
 private:
-	KdTexture *m_playerTex;
+	KdTexture m_playerTex;
 
 	std::shared_ptr<CharaBase>charaBase;
 

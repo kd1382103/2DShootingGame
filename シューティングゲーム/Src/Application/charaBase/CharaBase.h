@@ -1,13 +1,19 @@
 #pragma once
 
+class Player;
+
+class Enemy;
+
 class CharaBase
 {
 public:
-	CharaBase(){}
+	CharaBase() { Init(); }
 	~CharaBase() { Release(); }
 
-	void Update();
-	void Draw2D();
+	virtual void Init();
+	virtual void Update();
+	virtual void Draw2D();
+	virtual void Release();
 
 	void GetPos(Math::Vector2 _pos)
 	{
@@ -16,7 +22,6 @@ public:
 
 protected:
 
-	void Release();
 
 	Math::Vector2 m_pos;
 	Math::Vector2 m_move;

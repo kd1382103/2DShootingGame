@@ -7,9 +7,9 @@ public:
 	Enemy();
 	~Enemy() { }
 
-	void Update();
+	void Update()override;
 
-	void Draw2D();
+	void Draw2D()override;
 
 	void SetTex(KdTexture* tex) { m_enemyTex = tex; }
 

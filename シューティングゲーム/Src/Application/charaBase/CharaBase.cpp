@@ -1,9 +1,12 @@
 #include "CharaBase.h"
 
+void CharaBase::Init()
+{
+
+}
+
 void CharaBase::Draw2D()
 {
-	
-	//SHADER.m_spriteShader.DrawTex(m_bossTex, Math::Rectangle(0, 0, 64, 64));
 }
 
 void CharaBase::Update()

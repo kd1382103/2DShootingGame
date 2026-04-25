@@ -22,6 +22,5 @@ void Enemy::Draw2D()
 
 void Enemy::Update()
 {
-	charaBase->Update();
 }
 
