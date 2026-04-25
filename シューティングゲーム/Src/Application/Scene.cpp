@@ -36,7 +36,7 @@ void Scene::Draw2D()
 		SHADER.m_spriteShader.DrawTex(&bossTex, Math::Rectangle{ (int)bossAnimeCnt * 224,0,224,240 }, 1.0f);
 	}
 
-	//m_charaBase->Draw2D();
+	m_charaBase->Draw2D();
 	
 	//‚±‚Ì‰º‚ÉDrawString‚ğ‘‚­----------------------------------------------------------------------------------
 

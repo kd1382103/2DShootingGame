@@ -4,14 +4,14 @@
 class Enemy :public CharaBase
 {
 public:
-	Enemy();
+	Enemy() { Init(); }
 	~Enemy() { }
 
 	void Update()override;
-
 	void Draw2D()override;
+	void Init()override;
 
-	void SetTex(KdTexture* tex) { m_enemyTex = tex; }
+	//void SetTex(KdTexture* tex) { m_enemyTex = tex; }
 
 	/*void SetNum(int enemyNum)
 	{
@@ -23,12 +23,12 @@ public:
 		;
 	}*/
 
-	void SetPos(float posX, float posY) { m_pos.x, m_pos.y = posX, posY; };
+	//void SetPos(float posX, float posY) { m_pos.x, m_pos.y = posX, posY; };
 	
 private:
 	std::shared_ptr<CharaBase>charaBase;
 
-	KdTexture* m_enemyTex;
+	KdTexture* m_tex;
 
 	bool aliveFlg;
 	static const int enemyNum = 10;

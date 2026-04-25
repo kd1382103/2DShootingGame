@@ -2,11 +2,12 @@
 
 void Player::Init()
 {
-	m_playerTex.Load("Texture/player.png");
+	m_tex.Load("Texture/player.png");
 	m_pos = { 0,-200 };
 	m_move = { 0,0 };
 	m_scale = { 1,1 };
 	movePow = 2;
+	aliveFlg == true;
 }
 
 void Player::Update()
@@ -46,16 +47,22 @@ void Player::Update()
 			m_pos.y -= m_move.y;
 		}
 	}
+
+	//ç¿ïWçXêV
+	m_pos += m_move;
+
+	m_scaleMat = Math::Matrix::CreateScale(m_scale.x, m_scale.y, 1.0f);
+	m_transMat = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 1.0f);
+	m_mat = m_scaleMat * m_transMat;
+
 }
 
 void Player::Draw2D()
 {
-	SHADER.m_spriteShader.SetMatrix(m_mat);
 	if (aliveFlg == true)
 	{
 		//SHADER.m_spriteShader.DrawTex(m_playerTex, Math::Rectangle(0, 0, 64, 64));
-		KdShaderManager::GetInstance().m_spriteShader.DrawTex(&m_playerTex, m_pos.x, m_pos.y);
-
+		KdShaderManager::GetInstance().m_spriteShader.DrawTex(&m_tex, m_pos.x, m_pos.y);
 	}
 }
 

@@ -1,9 +1,5 @@
 #pragma once
 
-class Player;
-
-class Enemy;
-
 class CharaBase
 {
 public:
