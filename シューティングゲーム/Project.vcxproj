@@ -159,9 +159,10 @@
     <ClInclude Include="..\Library\tinygltf\stb_image.h" />
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
-    <ClInclude Include="Src\Application\charaBase\CharaBase.h" />
-    <ClInclude Include="Src\Application\Enemy\Enemy.h" />
-    <ClInclude Include="Src\Application\Player\Player.h" />
+    <ClInclude Include="Src\Application\chara\charaBase\CharaBase.h" />
+    <ClInclude Include="Src\Application\chara\CharaManager.h" />
+    <ClInclude Include="Src\Application\chara\Enemy\Enemy.h" />
+    <ClInclude Include="Src\Application\chara\Player\Player.h" />
     <ClInclude Include="Src\Application\Scene.h" />
     <ClInclude Include="Src\Application\main.h" />
     <ClInclude Include="Src\System\Audio\KdAudio.h" />
@@ -187,9 +188,10 @@
     <ClCompile Include="..\Library\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Src\Application\charaBase\CharaBase.cpp" />
-    <ClCompile Include="Src\Application\Enemy\Enemy.cpp" />
-    <ClCompile Include="Src\Application\Player\Player.cpp" />
+    <ClCompile Include="Src\Application\chara\charaBase\CharaBase.cpp" />
+    <ClCompile Include="Src\Application\chara\CharaManager.cpp" />
+    <ClCompile Include="Src\Application\chara\Enemy\Enemy.cpp" />
+    <ClCompile Include="Src\Application\chara\Player\Player.cpp" />
     <ClCompile Include="Src\Application\Scene.cpp" />
     <ClCompile Include="Src\Application\main.cpp" />
     <ClCompile Include="Src\System\Audio\KdAudio.cpp" />

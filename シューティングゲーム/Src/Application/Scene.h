@@ -1,16 +1,39 @@
 #pragma once
-#include "Application/Player/Player.h"
-#include "Application/Enemy/Enemy.h"
 
-class CharaBase;
+class CharaManager;
 
 class Scene
 {
+
+public:
+
+	// 初期設定
+	void Init();
+
+	// 更新処理
+	void Update();
+
+	// 描画処理
+	void DrawSprite();
+
+	//プレイヤーの座標取得
+	void GetPlayerPos() { Math::Vector2 m_pos; };
+
+	// GUI処理
+	void ImGuiUpdate();
+	
+	//関数宣言後「ALT+Enter」で関数定義を作成する
+
+	//爆発
+	void Explosion(float x, float y);
+
+	//リセット
+	void RESET();
+
+	void Release();
+
 private:
 
-	CharaBase* m_charaBase;
-	Player* m_player;
-	Enemy* m_enemy;
 
 	// テクスチャ ・・・ 画像データ
 	KdTexture bossTex;
@@ -22,7 +45,7 @@ private:
 
 	//スコア
 	int score;
-	
+
 	//爆発の変数
 	static const int expNum = 10;
 
@@ -46,8 +69,8 @@ private:
 	int playerSpeedDecreaseFlg = false;	//移動速度減少フラグ
 
 	float playerAnimeCnt;
-	float playerAnimeCntMax=4;
-	float playerFrame=0.25f;
+	float playerAnimeCntMax = 4;
+	float playerFrame = 0.25f;
 
 	//エネミー（敵機）の変数
 	static const int enemyNum = 10;//敵の数(書き換え不可)
@@ -75,43 +98,18 @@ private:
 	Math::Matrix backMat2;
 	float backX;
 
-	//画面橋
-	float screenEdgeX=1280;//画面端X
-	float screenEdgeY=720;//画面端Y
+	////画面橋
+	float screenEdgeX = 1280;//画面端X
+	float screenEdgeY = 720;//画面端Y
 
-	//キャラ半径
+	////キャラ半径
 	float charaRadius = 32;
 
 	//弾半径
 	float bulletRadius;
 
-public:
+	CharaManager* m_charaManager = nullptr;
 
-	// 初期設定
-	void Init();
-
-	// 解放
-	void Release();
-
-	// 更新処理
-	void Update();
-
-	// 描画処理
-	void Draw2D();
-
-	//プレイヤーの座標取得
-	void GetPlayerPos() { Math::Vector2 m_pos; };
-
-	// GUI処理
-	void ImGuiUpdate();
-	
-	//関数宣言後「ALT+Enter」で関数定義を作成する
-
-	//爆発
-	void Explosion(float x, float y);
-
-	//リセット
-	void RESET();
 private:
 
 	Scene() {}

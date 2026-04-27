@@ -1,10 +1,9 @@
 #include "main.h"
 #include "Scene.h"
-#include"charaBase/CharaBase.h"
-
+#include "Application/chara/CharaManager.h"
 
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
-void Scene::Draw2D()
+void Scene::DrawSprite()
 {
 	//先に書いたものから描画される
 
@@ -14,6 +13,12 @@ void Scene::Draw2D()
 	//背景(2)
 	SHADER.m_spriteShader.SetMatrix(backMat2);
 	SHADER.m_spriteShader.DrawTex(&backgroundTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
+
+	KdShaderManager::GetInstance().m_spriteShader.Begin();
+	{
+		m_charaManager->DrawSprite();
+	}
+	KdShaderManager::GetInstance().m_spriteShader.End();
 
 	//爆発の表示
 	for(int ex=0;ex<expNum;ex++){
@@ -36,8 +41,7 @@ void Scene::Draw2D()
 		SHADER.m_spriteShader.DrawTex(&bossTex, Math::Rectangle{ (int)bossAnimeCnt * 224,0,224,240 }, 1.0f);
 	}
 
-	m_charaBase->Draw2D();
-	
+
 	//この下にDrawStringを書く----------------------------------------------------------------------------------
 
 	//①文字列格納用の配列作成
@@ -50,9 +54,9 @@ void Scene::Draw2D()
 	SHADER.m_spriteShader.DrawString(-640, 360, text, Math::Vector4(1, 1, 0, 1));//文字を表示させる
 
 	//ゲームオーバー
-	if (playerFlg == false) {
-		SHADER.m_spriteShader.DrawString(0, 0, "YOU DEAD", Math::Vector4(1, 0, 0, 1));
-	}
+	//if (playerFlg == false) {
+	//	SHADER.m_spriteShader.DrawString(0, 0, "YOU DEAD", Math::Vector4(1, 0, 0, 1));
+	//}
 	if (backX < -screenEdgeX )
 	{
 		backX = 0;
@@ -63,6 +67,7 @@ void Scene::Draw2D()
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
 void Scene::Update()
 {
+
 	int enemyMove = 3;
 	int bulletMove = 15;
 
@@ -107,18 +112,18 @@ void Scene::Update()
 			}
 
 
-			if (playerFlg == 1) {
-				//自機との当たり判定
-				//float a = enemyX[e] - playerX;//底辺
-				//float b = enemyY[e] - playerY;//高さ
-				//float c = sqrt(a * a + b * b);//斜辺（sqrt→ルート）
+			//if (playerFlg == 1) {
+			//	//自機との当たり判定
+			//	float a = enemyX[e] - playerX;//底辺
+			//	float b = enemyY[e] - playerY;//高さ
+			//	float c = sqrt(a * a + b * b);//斜辺（sqrt→ルート）
 
-				//if (c < charaRadius + charaRadius) {//衝突していたら(斜辺＜半径+半径)
-					//enemyFlg[e] = false;//敵を倒す
-					//playerFlg = false;
-					//Explosion(playerX,playerY);
-				//}
-			}
+			//	if (c < charaRadius + charaRadius) {//衝突していたら(斜辺＜半径+半径)
+			//		enemyFlg[e] = false;//敵を倒す
+			//		playerFlg = false;
+			//		Explosion(playerX,playerY);
+			//	}
+			//}
 		}
 
 	}
@@ -210,8 +215,6 @@ void Scene::Update()
 		}
 	}
 	//↓Updateの最後に行列作成↓↓
-	//自機
-	//m_player =Math::Matrix::CreateTranslation(playerX, playerY, 0);
 	//敵機
 	for (int e = 0;e < enemyNum;e++) {
 		enemyMat[e] = Math::Matrix::CreateTranslation(enemyX[e], enemyY[e], 0);
@@ -242,14 +245,13 @@ void Scene::Update()
 	Math::Matrix trans = Math::Matrix::CreateTranslation(bossX, bossY, 0);//移動行列
 	Math::Matrix scale=Math::Matrix::CreateScale(bossSiz, bossSiz, 0);//拡縮行列
 	                                                           //↓ラジアン単位に変換
-	//Math::Matrix rotate= Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(bossAngle));//回転行列
-	//bossMat = scale * rotate * trans;//拡縮　*　回転　*　移動	
-	bossMat = scale * trans;//拡縮　*　回転　*　移動	
+	bossMat = scale * trans;//拡縮　*　移動	
 }
 
 //ゲーム開始時、最初の1フレームのみ実行
 void Scene::Init()
 {
+
 	//乱数の初期化(※必ずInitに一度だけ書く)
 	srand(time(0));
 	// 画像の読み込み処理
@@ -259,18 +261,6 @@ void Scene::Init()
 	expTex.Load("Texture/explosion.png");
 	//hitPointTex.Load("Texture/sozai/hitPoint.png");
 
-	//自機の初期化処理
-	/*playerX = 0;
-	playerY = -200;*/
-	playerFlg = 1;
-	playerAnimeCnt=0;
-
-	//敵の初期化処理
-	for (int e = 0;e < enemyNum;e++) {
-		enemyX[e] = 640 + 32;
-		enemyY[e] = rand() % (720 + 1 - 64) - (360 - 32);
-		enemyFlg[e] = 1;
-	}
 
 	//弾の初期値
 	for (int bu = 0;bu < bulletNum;bu++) {
@@ -349,7 +339,7 @@ void Scene::RESET()
 				enemyX[e] = rand() % (1280 + 1 - 64) - (640 - 32);
 				enemyY[e] = 360 + 32;
 			}
-			playerFlg = 1;
+			playerFlg = true;
 			/*playerX = 0;
 			playerY = -200;*/
 			score = 0;

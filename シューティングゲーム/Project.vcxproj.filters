@@ -43,14 +43,17 @@
     <Filter Include="Src\System\Audio">
       <UniqueIdentifier>{667d1cb1-5ae5-476f-acd5-14b7d294a95a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\charaBase">
-      <UniqueIdentifier>{70c70573-bf55-4859-ac69-487f7a4919b1}</UniqueIdentifier>
+    <Filter Include="Src\Application\chara">
+      <UniqueIdentifier>{a1f5d7a4-ea6e-4ca9-9478-80eb683fe138}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Player">
+    <Filter Include="Src\Application\chara\Enemy">
+      <UniqueIdentifier>{75753b8b-f480-47eb-8f29-6ec7a590c685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\chara\Player">
       <UniqueIdentifier>{9c161993-4297-44e4-91bc-5bca95642ec0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Enemy">
-      <UniqueIdentifier>{75753b8b-f480-47eb-8f29-6ec7a590c685}</UniqueIdentifier>
+    <Filter Include="Src\Application\chara\charaBase">
+      <UniqueIdentifier>{70c70573-bf55-4859-ac69-487f7a4919b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -147,14 +150,17 @@
     <ClInclude Include="Src\Application\Scene.h">
       <Filter>Src\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\charaBase\CharaBase.h">
-      <Filter>Src\Application\charaBase</Filter>
+    <ClInclude Include="Src\Application\chara\Enemy\Enemy.h">
+      <Filter>Src\Application\chara\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Player\Player.h">
-      <Filter>Src\Application\Player</Filter>
+    <ClInclude Include="Src\Application\chara\Player\Player.h">
+      <Filter>Src\Application\chara\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Enemy\Enemy.h">
-      <Filter>Src\Application\Enemy</Filter>
+    <ClInclude Include="Src\Application\chara\charaBase\CharaBase.h">
+      <Filter>Src\Application\chara\charaBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\chara\CharaManager.h">
+      <Filter>Src\Application\chara</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,14 +227,17 @@
     <ClCompile Include="Src\Application\main.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\charaBase\CharaBase.cpp">
-      <Filter>Src\Application\charaBase</Filter>
+    <ClCompile Include="Src\Application\chara\Enemy\Enemy.cpp">
+      <Filter>Src\Application\chara\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Player\Player.cpp">
-      <Filter>Src\Application\Player</Filter>
+    <ClCompile Include="Src\Application\chara\Player\Player.cpp">
+      <Filter>Src\Application\chara\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Enemy\Enemy.cpp">
-      <Filter>Src\Application\Enemy</Filter>
+    <ClCompile Include="Src\Application\chara\charaBase\CharaBase.cpp">
+      <Filter>Src\Application\chara\charaBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\chara\CharaManager.cpp">
+      <Filter>Src\Application\chara</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

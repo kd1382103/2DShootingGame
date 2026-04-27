@@ -7,17 +7,12 @@ void Player::Init()
 	m_move = { 0,0 };
 	m_scale = { 1,1 };
 	movePow = 2;
-	aliveFlg == true;
+	aliveFlg = true;
 }
 
 void Player::Update()
 {
-	int enemyMove = 3;
-	int bulletMove = 15;
-
-	charaBase->Update();
-
-	if (aliveFlg == true) {
+	if (aliveFlg) {
 		//自機移動処理・加速・減速
 		//加速
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
@@ -47,23 +42,21 @@ void Player::Update()
 			m_pos.y -= m_move.y;
 		}
 	}
-
-	//座標更新
-	m_pos += m_move;
-
-	m_scaleMat = Math::Matrix::CreateScale(m_scale.x, m_scale.y, 1.0f);
-	m_transMat = Math::Matrix::CreateTranslation(m_pos.x, m_pos.y, 1.0f);
-	m_mat = m_scaleMat * m_transMat;
-
 }
 
-void Player::Draw2D()
+void Player::DrawSprite()
 {
-	if (aliveFlg == true)
+	Math::Rectangle rc;
+	rc = { 0, 0, 64, 64 };
+
+	if (aliveFlg)
 	{
-		//SHADER.m_spriteShader.DrawTex(m_playerTex, Math::Rectangle(0, 0, 64, 64));
-		KdShaderManager::GetInstance().m_spriteShader.DrawTex(&m_tex, m_pos.x, m_pos.y);
+		KdShaderManager::GetInstance().m_spriteShader.
+			DrawTex(&m_tex, rc, 1.0f, m_pos);
 	}
+
+	SHADER.m_spriteShader.DrawString(0, 0, "キャラクター描画", Math::Vector4(1, 0, 0, 1));
+	
 }
 
 void Player::Release()

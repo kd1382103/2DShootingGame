@@ -130,6 +130,8 @@ void Application::Release()
 
 }
 
+
+
 // アプリケーション実行
 void Application::Execute()
 {
@@ -203,7 +205,7 @@ void Application::Execute()
 
 		// ゲーム描画処理
 		SHADER.m_spriteShader.Begin();
-		SCENE.Draw2D();
+		SCENE.DrawSprite();
 		SHADER.m_spriteShader.End();
 
 

@@ -2,16 +2,14 @@
 
 void CharaBase::Init()
 {
-	
 }
 
-void CharaBase::Draw2D()
+void CharaBase::DrawSprite()
 {
 }
 
 void CharaBase::Update()
 {
-
 }
 
 void CharaBase::Release()
