@@ -1,43 +1,28 @@
 #pragma once
 
-class CharaManager;
+//class CharaManager;
+class CharaBase;
 
 class Scene
 {
 
 public:
 
-	// 初期設定
 	void Init();
-
-	// 更新処理
 	void Update();
-
-	// 描画処理
 	void DrawSprite();
-
-	//プレイヤーの座標取得
-	void GetPlayerPos() { Math::Vector2 m_pos; };
-
-	// GUI処理
-	void ImGuiUpdate();
-	
-	//関数宣言後「ALT+Enter」で関数定義を作成する
-
-	//爆発
 	void Explosion(float x, float y);
-
-	//リセット
 	void RESET();
-
 	void Release();
+
+	void GetPlayerPos() { Math::Vector2 m_pos; };
+	
+	void ImGuiUpdate();
 
 private:
 
 
-	// テクスチャ ・・・ 画像データ
 	KdTexture bossTex;
-
 	KdTexture backgroundTex;
 	KdTexture bulletTex;
 	KdTexture expTex;
@@ -108,7 +93,9 @@ private:
 	//弾半径
 	float bulletRadius;
 
-	CharaManager* m_charaManager = nullptr;
+	std::shared_ptr<CharaBase>m_player	= nullptr;
+	std::shared_ptr<CharaBase>m_enemy	= nullptr;
+	//CharaManager* m_charaManager = nullptr;
 
 private:
 

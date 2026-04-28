@@ -59,9 +59,6 @@ private:
 	Math::Matrix m_transMat;
 	Math::Matrix m_mat;
 
-	std::shared_ptr<CharaBase>charaBase;
-
-
 	bool aliveFlg;	//生存フラグ
 	float movePow;	//移動量（増減）
 };

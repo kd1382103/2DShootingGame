@@ -7,14 +7,12 @@ public:
 	Enemy() { Init(); }
 	~Enemy() override { Release(); }
 
-	void Update()	override;
+	void Update()		override;
 	void DrawSprite()	override;
-	void Init()		override;
+	void Init()			override;
 
 private:
 	void Release()	override;
-
-	std::shared_ptr<CharaBase>charaBase;
 
 	KdTexture m_tex;
 

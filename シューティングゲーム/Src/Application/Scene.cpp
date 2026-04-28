@@ -1,7 +1,8 @@
 #include "main.h"
 #include "Scene.h"
-#include "Application/chara/CharaManager.h"
 
+#include "Application/chara/Enemy/Enemy.h"
+#include "Application/chara/Player/Player.h"
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
 void Scene::DrawSprite()
 {
@@ -14,11 +15,6 @@ void Scene::DrawSprite()
 	SHADER.m_spriteShader.SetMatrix(backMat2);
 	SHADER.m_spriteShader.DrawTex(&backgroundTex, Math::Rectangle{ 0,0,1280,720 }, 1.0f);
 
-	KdShaderManager::GetInstance().m_spriteShader.Begin();
-	{
-		m_charaManager->DrawSprite();
-	}
-	KdShaderManager::GetInstance().m_spriteShader.End();
 
 	//爆発の表示
 	for(int ex=0;ex<expNum;ex++){
@@ -34,6 +30,9 @@ void Scene::DrawSprite()
 			SHADER.m_spriteShader.DrawTex(&bulletTex, Math::Rectangle{ 0,0,16,16 }, 1.0f);
 		}
 	}
+
+	m_player->DrawSprite();
+	m_enemy->DrawSprite();
 
 	//boss
 	if (bossFlg == true) {
@@ -67,6 +66,8 @@ void Scene::DrawSprite()
 //↓一秒間に６０回のペースで繰り返し実行される（６０FPS）
 void Scene::Update()
 {
+	m_player->Update();
+	m_enemy->Update();
 
 	int enemyMove = 3;
 	int bulletMove = 15;
@@ -251,16 +252,20 @@ void Scene::Update()
 //ゲーム開始時、最初の1フレームのみ実行
 void Scene::Init()
 {
+	m_player = std::make_shared<Player>();
+	m_enemy= std::make_shared<Enemy>();
+
+	m_player->Init();
+	m_enemy->Init();
 
 	//乱数の初期化(※必ずInitに一度だけ書く)
 	srand(time(0));
-	// 画像の読み込み処理
+
 	backgroundTex.Load("Texture/back.png");
 	bossTex.Load("Texture/sozai/bossEnemy.png");
 	bulletTex.Load("Texture/bullet.png");
 	expTex.Load("Texture/explosion.png");
 	//hitPointTex.Load("Texture/sozai/hitPoint.png");
-
 
 	//弾の初期値
 	for (int bu = 0;bu < bulletNum;bu++) {

@@ -12,7 +12,7 @@ void Player::Init()
 
 void Player::Update()
 {
-	if (aliveFlg) {
+	//if (aliveFlg) {
 		//自機移動処理・加速・減速
 		//加速
 		if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
@@ -41,7 +41,7 @@ void Player::Update()
 		{
 			m_pos.y -= m_move.y;
 		}
-	}
+	//}
 }
 
 void Player::DrawSprite()
@@ -49,14 +49,8 @@ void Player::DrawSprite()
 	Math::Rectangle rc;
 	rc = { 0, 0, 64, 64 };
 
-	if (aliveFlg)
-	{
-		KdShaderManager::GetInstance().m_spriteShader.
-			DrawTex(&m_tex, rc, 1.0f, m_pos);
-	}
-
-	SHADER.m_spriteShader.DrawString(0, 0, "キャラクター描画", Math::Vector4(1, 0, 0, 1));
-	
+	KdShaderManager::GetInstance().m_spriteShader.
+		DrawTex(&m_tex, rc, 1.0f), m_pos;
 }
 
 void Player::Release()
